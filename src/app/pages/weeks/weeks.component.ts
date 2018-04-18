@@ -7,9 +7,10 @@ import {CalendarModel} from "../../models/calendar.model";
   styleUrls:['weeks.component.sass']
 })
 export class WeeksComponent{
-  public weeksList : Array<string>;
+  private weeksList : Array<string>;
 
   constructor(public calendar:CalendarModel){
-
+    this.weeksList = calendar.getWeeksList();
+    console.log(this.weeksList);
   }
 }

@@ -13,6 +13,7 @@ import {WeeksComponent} from "./pages/weeks/weeks.component"
 import {CalendarModel} from "./models/calendar.model"
 
 import {routing} from "./app.routing";
+import {DaysComponent} from "./pages/days/days.component";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {routing} from "./app.routing";
     HomeComponent,
     HeaderComponent,
     SeasonsComponent,
-    WeeksComponent
+    WeeksComponent,
+    DaysComponent
   ],
   imports: [
     BrowserModule,

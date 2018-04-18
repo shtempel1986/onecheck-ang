@@ -47,13 +47,9 @@ export default class Season {
       weekTitle += ' неделя ';
       weekTitle += weekIncrement.getFullYear();
 
-      console.log(weekTitle);
-
       this.weeksList.push(weekTitle);
       weekIncrement = new Date(weekIncrement.getTime() + calendarConsts.week);
     }
-
-    console.log(this.weeksList);
 
   }
 }

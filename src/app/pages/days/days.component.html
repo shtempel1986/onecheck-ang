@@ -1,11 +1,11 @@
 <div class="container-fluid bg-light">
-  <h1 class="text-center mt-2">{{calendar.activeSeason.seasonTitle}}</h1>
+  <h1 class="text-center mt-2">{{calendar.activeWeek.weekTitle}}</h1>
   <ul class="list-group">
     <li class="list-group-item weeks__item d-flex justify-content-between bg-info"
-        *ngFor="let weekLink of weeksList">
-      <a routerLink="/days" (click)="calendar.setActiveWeek(weekLink)"
+        *ngFor="let dayLink of calendar.activeWeek.daysList">
+      <a routerLink="/tasks"
          class="season__link d-block font-weight-bold text-light">
-        {{weekLink}}
+        {{dayLink}}
       </a>
     </li>
   </ul>

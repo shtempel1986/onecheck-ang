@@ -18,10 +18,38 @@ let calendarConsts = {
     if (target.getDay() !== 1) {
       target.setMonth(0, 1 + ((8 - target.getDay())) % 7);
     }
-    console.log(date,new Date(firstThursday));
-    console.log(target);
     return Math.ceil((firstThursday - target.valueOf()) / this.week) + deltaWeek;
-  }
+  },
+  getCurrentWeek: function () {
+    let currentWeek = this.getWeek(new Date());
+    let currentYear = (new Date()).getFullYear();
+
+    let currentWeekString = currentWeek + ' неделя ' + currentYear;
+    return (currentWeekString);
+  },
+  dayNames:[
+    'воскресенье',
+    'понедельник',
+    'вторник',
+    'среда',
+    'четверг',
+    'пятница',
+    'суббота'
+  ],
+  monthNames:[
+    'января',
+    'февраля',
+    'марта',
+    'апреля',
+    'мая',
+    'июня',
+    'июля',
+    'августа',
+    'сентября',
+    'октября',
+    'ноября',
+    'декабря'
+  ]
 };
 
 export default calendarConsts;

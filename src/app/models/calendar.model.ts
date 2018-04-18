@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core"
 import calendarConsts from './calendarConsts';
 import Season from './Season';
+import Week from './Week';
 
 
 /* =======================================================
@@ -13,7 +14,8 @@ export class CalendarModel {
   private today: Date;
   private seasonsNames = calendarConsts.seasonsNames;
 
-  public activeSeason: Season = new Season('Зима 2018');
+  public activeSeason: Season = new Season('Весна 2018');
+  public activeWeek: Week = new Week(calendarConsts.getCurrentWeek());
 
   constructor() {
 
@@ -35,5 +37,13 @@ export class CalendarModel {
 
   setActiveSeason(seasonTitle: string){
     this.activeSeason = new Season(seasonTitle);
+  }
+
+  getWeeksList(){
+    return this.activeSeason.weeksList;
+  }
+
+  setActiveWeek (weekTitle: string){
+    this.activeWeek = new Week(weekTitle);
   }
 }
