@@ -9,6 +9,7 @@ import {HomeComponent} from "./home.component"
 import {HeaderComponent} from "./components/header/header.component"
 import {SeasonsComponent} from "./pages/seasons/seasons.component";
 import {WeeksComponent} from "./pages/weeks/weeks.component"
+import {TasksComponent} from "./pages/tasks/tasks.component"
 
 import {CalendarModel} from "./models/calendar.model"
 
@@ -24,7 +25,8 @@ import {DaysComponent} from "./pages/days/days.component";
     HeaderComponent,
     SeasonsComponent,
     WeeksComponent,
-    DaysComponent
+    DaysComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,

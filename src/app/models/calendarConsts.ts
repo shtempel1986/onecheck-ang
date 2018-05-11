@@ -1,20 +1,20 @@
 let calendarConsts = {
   day: 86400000,
-  week:604800000,
-  seasonsNames : [
+  week: 604800000,
+  seasonsNames: [
     'Зима',
     'Весна',
     'Лето',
     'Осень'
   ],
-  getWeek:function (date:Date):number {// ПОЛУЧЕНИЕ НОМЕРА НЕДЕЛИ
+  getWeek: function (date: Date): number {// ПОЛУЧЕНИЕ НОМЕРА НЕДЕЛИ
     let target = new Date(date.getTime());
     let dayNr = (date.getDay() + 6) % 7;
     let year = target.getFullYear();
     target.setDate(target.getDate() - dayNr);
     let firstThursday = target.valueOf();
     let deltaWeek = 1;
-    target.setFullYear(year,0, 1);
+    target.setFullYear(year, 0, 1);
     if (target.getDay() !== 1) {
       target.setMonth(0, 1 + ((8 - target.getDay())) % 7);
     }
@@ -27,7 +27,7 @@ let calendarConsts = {
     let currentWeekString = currentWeek + ' неделя ' + currentYear;
     return (currentWeekString);
   },
-  dayNames:[
+  dayNames: [
     'воскресенье',
     'понедельник',
     'вторник',
@@ -36,7 +36,7 @@ let calendarConsts = {
     'пятница',
     'суббота'
   ],
-  monthNames:[
+  monthNames: [
     'января',
     'февраля',
     'марта',
@@ -49,7 +49,34 @@ let calendarConsts = {
     'октября',
     'ноября',
     'декабря'
-  ]
+  ],
+  getTodaySeasonTitle: function () {
+    let todaySeasonTitle: string;
+    let now = new Date();
+    let season: number;
+
+    season = now.getMonth();
+
+    if (season === 12) {
+      todaySeasonTitle = this.seasonsNames[3] + ' ';
+    } else {
+      season = Math.floor(season / 3);
+      todaySeasonTitle = this.seasonsNames[season] + ' ';
+    }
+    todaySeasonTitle += now.getFullYear();
+    return todaySeasonTitle;
+  },
+  getTodayTitle():string {
+    let todayTitle: string;
+    let now = new Date();
+
+    todayTitle = now.getDate()+ ' ';
+    todayTitle += this.monthNames[now.getMonth()];
+    todayTitle += ' ';
+    todayTitle += this.dayNames[now.getDay()];
+
+    return todayTitle;
+  }
 };
 
 export default calendarConsts;

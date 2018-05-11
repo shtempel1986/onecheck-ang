@@ -2,8 +2,9 @@
   <h1 class="text-center mt-2">{{calendar.activeWeek.weekTitle}}</h1>
   <ul class="list-group">
     <li class="list-group-item weeks__item d-flex justify-content-between bg-info"
-        *ngFor="let dayLink of calendar.activeWeek.daysList">
-      <a routerLink="/tasks"
+        *ngFor="let dayLink of calendar.activeWeek.daysList"
+        [ngClass]="dayLink === calendar.todayTitle ? 'season__item_today': ''">
+      <a routerLink="/tasks" (click)="calendar.setActiveDay(dayLink)"
          class="season__link d-block font-weight-bold text-light">
         {{dayLink}}
       </a>

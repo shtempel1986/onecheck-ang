@@ -11,6 +11,5 @@ export class WeeksComponent{
 
   constructor(public calendar:CalendarModel){
     this.weeksList = calendar.getWeeksList();
-    console.log(this.weeksList);
   }
 }

@@ -2,7 +2,8 @@
   <h1 class="text-uppercase text-center">Времена года</h1>
   <ul class="list-group">
     <li class="list-group-item season__item d-flex justify-content-between bg-info"
-        *ngFor="let seasonLink of seasonList">
+        *ngFor="let seasonLink of seasonList"
+        [ngClass]="seasonLink === calendar.todaySeasonTitle ? 'season__item_today': ''">
       <a routerLink="/weeks" (click)="calendar.setActiveSeason(seasonLink)"
          class="season__link d-block font-weight-bold text-light">
         {{seasonLink}}

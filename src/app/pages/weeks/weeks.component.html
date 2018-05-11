@@ -2,7 +2,8 @@
   <h1 class="text-center mt-2">{{calendar.activeSeason.seasonTitle}}</h1>
   <ul class="list-group">
     <li class="list-group-item weeks__item d-flex justify-content-between bg-info"
-        *ngFor="let weekLink of weeksList">
+        *ngFor="let weekLink of weeksList"
+        [ngClass]="weekLink === calendar.todayWeekTitle ? 'season__item_today': ''">
       <a routerLink="/days" (click)="calendar.setActiveWeek(weekLink)"
          class="season__link d-block font-weight-bold text-light">
         {{weekLink}}

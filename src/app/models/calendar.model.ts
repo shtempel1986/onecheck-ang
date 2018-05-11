@@ -14,8 +14,13 @@ export class CalendarModel {
   private today: Date;
   private seasonsNames = calendarConsts.seasonsNames;
 
-  public activeSeason: Season = new Season('Весна 2018');
+  public activeSeason: Season = new Season(calendarConsts.getTodaySeasonTitle());
   public activeWeek: Week = new Week(calendarConsts.getCurrentWeek());
+  public activeDay : string = calendarConsts.getTodayTitle();
+
+  public todaySeasonTitle: string = calendarConsts.getTodaySeasonTitle();
+  public todayWeekTitle: string = calendarConsts.getCurrentWeek();
+  public todayTitle: string = calendarConsts.getTodayTitle();
 
   constructor() {
 
@@ -45,5 +50,10 @@ export class CalendarModel {
 
   setActiveWeek (weekTitle: string){
     this.activeWeek = new Week(weekTitle);
+  }
+
+  setActiveDay (dayTitle: string){
+    this.activeDay = dayTitle;
+    console.log(dayTitle);
   }
 }

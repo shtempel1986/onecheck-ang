@@ -4,6 +4,7 @@ import {HomeComponent} from "./home.component"
 import {SeasonsComponent} from "./pages/seasons/seasons.component"
 import {WeeksComponent} from "./pages/weeks/weeks.component"
 import {DaysComponent} from "./pages/days/days.component"
+import {TasksComponent} from "./pages/tasks/tasks.component"
 
 const routes: Routes =[
   {
@@ -25,6 +26,10 @@ const routes: Routes =[
   {
     path:'days',
     component: DaysComponent
+  },
+  {
+    path:'tasks',
+    component: TasksComponent
   }
 ];
 
