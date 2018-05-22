@@ -23,6 +23,7 @@ import {FormsModule} from "@angular/forms";
 import {AuthService} from "./auth/auth.service";
 import {REST_URL, RestDataSource} from "./models/rest.datasource";
 import {AuthCanActivateService} from "./auth-can-activate.service";
+import {RegistrationService} from "./auth/registration.service";
 
 
 @NgModule({
@@ -45,12 +46,13 @@ import {AuthCanActivateService} from "./auth-can-activate.service";
     routing
   ],
   providers: [
+    AuthCanActivateService,
     CalendarModel,
     AuthCheckService,
     StateService,
     AuthService,
-    AuthCanActivateService,
     RestDataSource,
+    RegistrationService,
     {provide: REST_URL, useValue: 'http://onecheck/rest_api'}
   ],
   bootstrap: [AppComponent]

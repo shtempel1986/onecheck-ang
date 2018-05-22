@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {RestDataSource} from "../models/rest.datasource";
 import {User} from "../models/User";
-import {AuthData} from "./AuthData";
+import {AuthData} from "../models/AuthData";
 
 @Injectable()
 export class AuthService {
 
-  public email: string = '45';
-  public password: string = '456';
+  public email: string = '';
+  public password: string = '';
 
   constructor(private restData: RestDataSource) {
   }

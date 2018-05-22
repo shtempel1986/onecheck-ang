@@ -22,12 +22,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const isLogin = this.checkService.isLogin();
-    console.log(this.activeRoute.snapshot);
-    if (!isLogin) {
-      this.router.navigateByUrl('auth');
-    } else if (isLogin instanceof User) {
-      this.state.setCurrentUser(isLogin);
-    }
   }
 }

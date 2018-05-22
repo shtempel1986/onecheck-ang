@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../auth/auth.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -9,12 +8,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class AuthComponent implements OnInit {
 
-  constructor(public auth: AuthService,
-              private activeRoute: ActivatedRoute) {
+  constructor(public auth: AuthService) {
   }
 
   ngOnInit() {
-    console.log(this.activeRoute.snapshot);
   }
 
 }

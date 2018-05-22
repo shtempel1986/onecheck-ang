@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import { catchError, map, tap } from 'rxjs/operators';
 import {User} from "./User";
 import {AuthService} from "../auth/auth.service";
-import {AuthData} from "../auth/AuthData";
+import {AuthData} from "./AuthData";
 
 
 let httpOptions = {
@@ -26,7 +26,6 @@ export class RestDataSource {
 
     return this.http.post(`${this.url}/auth`, authData).pipe(tap((res)=>{
         console.log(res);
-        return 'hghj';
       }
     ));
 

@@ -15,27 +15,28 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthCanActivateService]
   },
   {
     path: 'seasons',
     component: SeasonsComponent,
-    canActivate: ['AuthCanActivateService']
+    canActivate: [AuthCanActivateService]
   },
   {
     path: 'weeks',
     component: WeeksComponent,
-    canActivate: ['AuthCanActivateService']
+    canActivate: [AuthCanActivateService]
   },
   {
     path: 'days',
     component: DaysComponent,
-    canActivate: ['AuthCanActivateService']
+    canActivate: [AuthCanActivateService]
   },
   {
     path: 'tasks',
     component: TasksComponent,
-    canActivate: ['AuthCanActivateService']
+    canActivate: [AuthCanActivateService]
   },
   {
     path: 'auth',
