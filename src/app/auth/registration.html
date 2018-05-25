@@ -13,7 +13,7 @@
       </div>
       <div class="d-flex auth-bottom align-content-center justify-content-between">
 
-        <button
+        <button (click)="registration.registration()"
                 [disabled]="registration.email.length === 0 || registration.password.length < 6 || registration.confirmPassword.length < 6"
                 class="btn btn-primary pl-5 pr-5 auth__button">Зарегистрироваться
         </button>

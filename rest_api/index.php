@@ -6,10 +6,12 @@
  * Time: 18:00
  */
 
+require_once 'requires.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS, PATCH');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+header('Content-Type: application/json');
 
 // Определяем метод запроса
 $method = $_SERVER['REQUEST_METHOD'];
@@ -61,3 +63,5 @@ $urlData = array_slice($urls, 1);
 include_once "routers/$router.php";
 
 route($method, $urlData, $formData);
+
+$link->close();

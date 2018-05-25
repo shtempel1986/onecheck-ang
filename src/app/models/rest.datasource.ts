@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import {User} from "./User";
 import {AuthService} from "../auth/auth.service";
 import {AuthData} from "./AuthData";
+import {RegistrationModel} from "./registration.model";
 
 
 let httpOptions = {
@@ -29,6 +30,11 @@ export class RestDataSource {
       }
     ));
 
+  }
+
+  registrationRequest(registrationData: RegistrationModel):Observable<any>{
+
+    return this.http.post(`${this.url}/registration`, registrationData);
   }
 
 }
