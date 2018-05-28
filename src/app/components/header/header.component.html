@@ -2,12 +2,13 @@
   <div class="navbar navbar-dark navbar-expand">
     <h1 class="navbar-brand text-danger mb-0">Onecheck</h1>
 
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a routerLink="seasons" class="nav-link">Времена года</a>
-        </li>
-      </ul>
-
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="seasons" class="nav-link" [routerLinkActive]="'active'">Времена года</a>
+      </li>
+    </ul>
+    <button (click)="logOut()"
+        class="btn btn-outline-danger">Выход</button>
   </div>
 
 </div>

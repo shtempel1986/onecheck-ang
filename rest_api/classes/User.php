@@ -13,7 +13,7 @@ class User
 
   function __construct($userData)
   {
-    $this->id = $userData->id;
+    $this->userId = $userData->userId;
     $this->email = $userData->email;
   }
 }

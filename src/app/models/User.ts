@@ -18,7 +18,7 @@ export class CurrentUser extends User{
   }
 
   setCurrentUserInStorage(){
-    localStorage.setItem('userLogin', this.email);
+    localStorage.setItem('email', this.email);
     localStorage.setItem('userId', this.userId + '');
     localStorage.setItem('sessionToken', this.sessionToken);
     localStorage.setItem('sessionExpires', this.sessionExpires.toString());

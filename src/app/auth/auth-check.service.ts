@@ -1,29 +1,46 @@
 import {Injectable} from '@angular/core';
 import {User} from "../models/User";
+import {Router} from "@angular/router";
 
 
 @Injectable()
 export class AuthCheckService {
 
-  private userLogin: string;
+  private email: string;
   private sessionToken: string;
   private userId: string;
   private sessionExpires: Date = new Date();
 
-  constructor() {
-    this.userLogin = localStorage.getItem('email');
+  constructor(private router: Router) {
+    this.email = localStorage.getItem('email');
     this.sessionToken = localStorage.getItem('sessionToken');
     this.userId = localStorage.getItem('userId');
     const sessionExpires = localStorage.getItem('sessionExpires');
-    if(sessionExpires){
+    if (sessionExpires) {
       this.sessionExpires = new Date(sessionExpires);
     }
   }
 
   isLogin(): boolean | User {
-    if (!this.userLogin || !this.sessionToken || !this.userId) {
+
+    const now: number = (new Date()).getTime();
+    const expired: boolean = (now - this.sessionExpires.getTime()) > 0;
+    if (!this.email || !this.sessionToken || !this.userId || expired) {
       return false;
     }
-    return new User(this.userLogin, this.userId, this.sessionToken, this.sessionExpires);
+    return new User(this.email, this.userId, this.sessionToken, this.sessionExpires);
   }
+
+  logOut() {
+    this.email = null;
+    this.sessionToken = null;
+    this.userId = null;
+    this.sessionExpires = new Date();
+    localStorage.removeItem('email');
+    localStorage.removeItem('sessionToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('sessionExpires');
+    this.router.navigateByUrl('auth');
+  }
+
 }

@@ -1,4 +1,5 @@
 import {Component} from "@angular/core"
+import {AuthCheckService} from "../../auth/auth-check.service";
 
 @Component({
   selector:'header-component',
@@ -7,4 +8,11 @@ import {Component} from "@angular/core"
 })
 export class HeaderComponent{
 
+  constructor(private authCheck: AuthCheckService){
+
+  }
+
+  logOut(){
+    this.authCheck.logOut();
+  }
 }
