@@ -31,10 +31,4 @@ function route($method, $urlData, $formData)
 
   }
 
-  exit(json_encode([
-      'method' => $method,
-      'urlData' => $urlData,
-      'formData' => $formData
-    ]
-  ));
 }

@@ -7,6 +7,7 @@
  */
 
 define('SALT_MAX_LENGTH',8);
+define('JSON_OPTIONS', JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
 $dbpass = "";
 $dblogin = "root";

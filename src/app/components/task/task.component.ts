@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core"
-import {Task} from "./task";
+import {TaskModel} from "./task.model";
 
 @Component({
   selector: 'task-component',
@@ -7,5 +7,5 @@ import {Task} from "./task";
   styleUrls: ['./task.component.sass']
 })
 export class TaskComponent {
-  @Input()task: Task;
+  @Input()task: TaskModel;
 }
