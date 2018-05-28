@@ -2,7 +2,7 @@ import {Injectable, Inject, InjectionToken} from "@angular/core";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import { catchError, map, tap } from 'rxjs/operators';
-import {User} from "./User";
+import {CurrentUser, User} from "./User";
 import {AuthService} from "../auth/auth.service";
 import {AuthData} from "./AuthData";
 import {RegistrationModel} from "./registration.model";
@@ -32,9 +32,9 @@ export class RestDataSource {
 
   }
 
-  registrationRequest(registrationData: RegistrationModel):Observable<any>{
+  registrationRequest(registrationData: RegistrationModel):Observable<CurrentUser>{
 
-    return this.http.post(`${this.url}/registration`, registrationData);
+    return this.http.post<CurrentUser>(`${this.url}/registration`, registrationData);
   }
 
 }

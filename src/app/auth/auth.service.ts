@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {RestDataSource} from "../models/rest.datasource";
-import {User} from "../models/User";
 import {AuthData} from "../models/AuthData";
 
 @Injectable()

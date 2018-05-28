@@ -24,6 +24,8 @@ import {AuthService} from "./auth/auth.service";
 import {REST_URL, RestDataSource} from "./models/rest.datasource";
 import {AuthCanActivateService} from "./auth-can-activate.service";
 import {RegistrationService} from "./auth/registration.service";
+import {MessagesService} from "./services/messages.service";
+import { MessagesComponent } from './components/messages/messages.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import {RegistrationService} from "./auth/registration.service";
     DaysComponent,
     TasksComponent,
     TaskComponent,
-    AuthComponent
+    AuthComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import {RegistrationService} from "./auth/registration.service";
     AuthService,
     RestDataSource,
     RegistrationService,
-    {provide: REST_URL, useValue: 'http://onecheck/rest_api'}
+    {provide: REST_URL, useValue: 'http://onecheck/rest_api'},
+    MessagesService
   ],
   bootstrap: [AppComponent]
 })

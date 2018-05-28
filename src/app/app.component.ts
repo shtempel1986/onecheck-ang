@@ -3,6 +3,7 @@ import {AuthCheckService} from "./auth/auth-check.service";
 import {StateService} from "./state.service";
 import {User} from "./models/User";
 import {Router, ActivatedRoute} from "@angular/router";
+import {MessagesService} from "./services/messages.service";
 
 @Component({
   selector: 'app-root',

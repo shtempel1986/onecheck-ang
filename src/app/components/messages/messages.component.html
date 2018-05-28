@@ -1,0 +1,11 @@
+<div class="popup-wrapper" *ngIf="messagesService.showMessageWindow">
+  <div class="popup-container modal-content">
+    <div class="popup__message modal-title" *ngIf="messagesService.showMessage">
+      {{messagesService.message}}
+    </div>
+    <div class="popup__progress">
+      <img *ngIf="messagesService.showProgress"
+           [src]="progressImage" alt="progress">
+    </div>
+  </div>
+</div>
