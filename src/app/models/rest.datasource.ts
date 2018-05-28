@@ -25,10 +25,7 @@ export class RestDataSource {
 
   authRequest(authData: AuthData):Observable<any>{
 
-    return this.http.post(`${this.url}/auth`, authData).pipe(tap((res)=>{
-        console.log(res);
-      }
-    ));
+    return this.http.post(`${this.url}/auth`, authData)
 
   }
 

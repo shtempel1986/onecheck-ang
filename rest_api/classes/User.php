@@ -8,7 +8,7 @@
 
 class User
 {
-  public $id;
+  public $userId;
   public $email;
 
   function __construct($userData)

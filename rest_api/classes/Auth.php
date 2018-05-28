@@ -25,4 +25,25 @@ class Auth
 
     return !mysqli_num_rows($data);
   }
+
+  function checkPassword(){
+    global $link;
+
+    $sql = "SELECT * FROM onecheck.users WHERE email = '$this->email' LIMIT 1";
+    $data = $link->query($sql);
+
+    $data = mysqli_fetch_object($data);
+
+    if (!$data){
+      return false;
+    }
+
+    $hash = $data->hash;
+    $salt = $data->salt;
+
+    $userHash = hash('sha512', $this->password . $salt);
+
+    return hash_equals($hash, $userHash);
+
+  }
 }

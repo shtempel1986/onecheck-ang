@@ -1,5 +1,6 @@
 import {Component} from "@angular/core"
 import {AuthCheckService} from "../../auth/auth-check.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector:'header-component',
@@ -8,7 +9,8 @@ import {AuthCheckService} from "../../auth/auth-check.service";
 })
 export class HeaderComponent{
 
-  constructor(private authCheck: AuthCheckService){
+  constructor(private authCheck: AuthCheckService,
+              public router: Router){
 
   }
 
