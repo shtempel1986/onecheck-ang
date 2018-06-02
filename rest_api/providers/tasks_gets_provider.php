@@ -12,7 +12,12 @@ function tasksGetsProviders($urlData)
   $userId = null;
   if (isset($urlData[0])) {
     $userId = $urlData[0];
+  } else {
+    return new ErrorResponse('не хватает данных');
   }
+
+  CurrentUser::checkUserAuth($userId);
+
 
   $taskDay = null;
   if (isset($urlData[1])) {

@@ -19,3 +19,6 @@ require_once 'classes/Task.php';
 //ПРОВАЙДЕРЫ
 
 require_once 'providers/tasks_gets_provider.php';
+require_once 'providers/tasks_puts_provider.php';
+require_once 'providers/tasks_post_provider.php';
+require_once 'providers/tasks_delete_provider.php';

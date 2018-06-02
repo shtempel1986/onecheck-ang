@@ -41,7 +41,8 @@ class Task
   {
     global $link;
 
-    $sql = "SELECT * from tasks WHERE userId = '$userId' and taskDay = '$taskDay'";
+    $sql = "SELECT * from tasks 
+            WHERE userId = '$userId' and taskDay = '$taskDay' and taskDisplayed = true";
     $data = $link->query($sql);
 
     $taskList = [];
@@ -59,11 +60,69 @@ class Task
             WHERE userId = '$userId' 
             and taskDay = '$taskDay' 
             and taskId = '$taskId' 
+            and taskDisplayed = true 
             limit 1";
     $data = $link->query($sql);
 
     $task = mysqli_fetch_object($data);
+    $task = new Task($task);
 
     return $task;
+  }
+
+  static function changeCompleteTask($taskId, $userId, $taskCompleted)
+  {
+    global $link;
+    $sql = "UPDATE tasks SET taskCompleted = '$taskCompleted' 
+            WHERE userId = '$userId' AND taskId = '$taskId'";
+    $data = $link->query($sql);
+    if (!$data) {
+      new ErrorResponse('Ошибка БД');
+    }
+    exit("true");
+  }
+
+  static function changeDescriptionTask($taskId, $userId, $taskDescription)
+  {
+    global $link;
+
+    $sql = "UPDATE tasks SET taskDescription = '$taskDescription' 
+            WHERE userId = '$userId' AND taskId = '$taskId'";
+    $data = $link->query($sql);
+
+    if (!$data) {
+      new ErrorResponse('Ошибка БД: ' . $link->error);
+    }
+    exit("true");
+  }
+
+  static function addTask($userId, $taskDay)
+  {
+    global $link;
+
+    $sql = "INSERT INTO tasks (userId, taskDay) VALUES ('$userId', '$taskDay')";
+    $data = $link->query($sql);
+
+    if (!$data) {
+      new ErrorResponse('Ошибка БД: ' . $link->error);
+    }
+
+    $newTaskId = $link->insert_id;
+    $newTask = self::getTask($userId, $taskDay, $newTaskId);
+    return $newTask;
+  }
+
+  static function deleteTask($userId, $taskDay, $taskId){
+    global $link;
+
+    $sql = "UPDATE tasks SET taskDisplayed = false 
+            where userId = '$userId' and taskDay = '$taskDay' and taskId = '$taskId'";
+    $data = $link->query($sql);
+
+    if (!$data) {
+      new ErrorResponse('Ошибка БД: ' . $link->error);
+    }
+
+    return $taskId;
   }
 }

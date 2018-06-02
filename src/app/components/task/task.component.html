@@ -1,5 +1,18 @@
-<div class="task">
-  <label>
-    <input type="checkbox" class="d-none">
-  </label>
+<div class="task" [class.task_updating]="updateInProgress">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text">
+        <input (change)="completeTask()"
+               type="checkbox"
+               class="task__checkbox"
+               [(ngModel)]="taskModel.taskCompleted">
+      </label>
+    </div>
+    <textarea #textarea
+              (keydown)="keyDownHandler($event)"
+              autosize
+              (blur)="changeDescription()"
+              [(ngModel)]="taskModel.taskDescription"
+              title="Задача" class="form-control task__textarea"></textarea>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from "@angular/common/http"
+import {Autosize} from './direcives/autosize.directive';
 
 
 import {AppComponent} from './app.component';
@@ -25,7 +26,8 @@ import {REST_URL, RestDataSource} from "./models/rest.datasource";
 import {AuthCanActivateService} from "./auth-can-activate.service";
 import {RegistrationService} from "./auth/registration.service";
 import {MessagesService} from "./services/messages.service";
-import { MessagesComponent } from './components/messages/messages.component';
+import {MessagesComponent} from './components/messages/messages.component';
+import {TasksService} from "./pages/tasks/tasks.service";
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { MessagesComponent } from './components/messages/messages.component';
     TasksComponent,
     TaskComponent,
     AuthComponent,
-    MessagesComponent
+    MessagesComponent,
+    Autosize
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { MessagesComponent } from './components/messages/messages.component';
     RestDataSource,
     RegistrationService,
     {provide: REST_URL, useValue: 'http://onecheck/rest_api'},
-    MessagesService
+    MessagesService,
+    TasksService
   ],
   bootstrap: [AppComponent]
 })

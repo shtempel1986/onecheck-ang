@@ -43,7 +43,26 @@ class Auth
 
     $userHash = hash('sha512', $this->password . $salt);
 
-    return hash_equals($hash, $userHash);
+    $result = hash_equals($hash, $userHash);
 
+    if($result){
+      $this->updateToken();
+    }
+
+    return $result;
+  }
+
+  function updateToken(){
+
+    $sessionToken = hash('sha512', $this->email . time());
+
+    $sessionExpires = date('Y-m-d H:i:s', strtotime('+1 year'));
+    global $link;
+
+    $sql = "UPDATE onecheck.users 
+            SET sessionToken = '$sessionToken',
+            sessionExpires = '$sessionExpires' 
+            WHERE email = '$this->email'";
+    $link->query($sql);
   }
 }

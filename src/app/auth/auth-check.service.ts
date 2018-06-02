@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from "../models/User";
 import {Router} from "@angular/router";
+import {s} from "@angular/core/src/render3";
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class AuthCheckService {
   constructor(private router: Router) {
   }
 
-  updateFromLocalStorage(){
+  updateFromLocalStorage() {
     this.email = localStorage.getItem('email');
     this.sessionToken = localStorage.getItem('sessionToken');
     this.userId = localStorage.getItem('userId');
@@ -44,6 +45,15 @@ export class AuthCheckService {
     localStorage.removeItem('userId');
     localStorage.removeItem('sessionExpires');
     this.router.navigateByUrl('auth');
+  }
+
+  getSessionToken(): string {
+    this.updateFromLocalStorage();
+    return this.sessionToken;
+  }
+
+  getCurrentUser(): User {
+    return new User(this.email, this.userId, this.sessionToken, this.sessionExpires);
   }
 
 }

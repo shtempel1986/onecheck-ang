@@ -16,7 +16,7 @@ export class CalendarModel {
 
   public activeSeason: Season = new Season(calendarConsts.getTodaySeasonTitle());
   public activeWeek: Week = new Week(calendarConsts.getCurrentWeek());
-  public activeDay : string = calendarConsts.getTodayTitle();
+  public activeDay: string = calendarConsts.getTodayTitle();
 
   public todaySeasonTitle: string = calendarConsts.getTodaySeasonTitle();
   public todayWeekTitle: string = calendarConsts.getCurrentWeek();
@@ -40,20 +40,35 @@ export class CalendarModel {
     return seasonList;
   }
 
-  setActiveSeason(seasonTitle: string){
+  setActiveSeason(seasonTitle: string) {
     this.activeSeason = new Season(seasonTitle);
   }
 
-  getWeeksList(){
+  getWeeksList() {
     return this.activeSeason.weeksList;
   }
 
-  setActiveWeek (weekTitle: string){
+  setActiveWeek(weekTitle: string) {
     this.activeWeek = new Week(weekTitle);
   }
 
-  setActiveDay (dayTitle: string){
+  setActiveDay(dayTitle: string) {
     this.activeDay = dayTitle;
-    console.log(dayTitle);
+  }
+
+  getTaskDay(): string {
+    let lastSpace = this.activeWeek.weekTitle.lastIndexOf(' ');
+
+    let taskDay = this.activeWeek.weekTitle.substr(lastSpace + 1);
+
+    lastSpace = this.activeDay.lastIndexOf(' ');
+
+    let _str = this.activeDay.substring(0, lastSpace);
+
+    taskDay += ' ';
+
+    taskDay += _str;
+
+    return taskDay;
   }
 }

@@ -9,10 +9,10 @@
 class ErrorResponse
 {
 
-  public function __construct($message)
+  public function __construct($message, $responseCode = 501)
   {
     global $link;
-    http_response_code(501);
+    http_response_code($responseCode);
     $link->close();
     exit($message);
   }

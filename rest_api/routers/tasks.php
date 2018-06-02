@@ -9,27 +9,19 @@
 
 function route($method, $urlData, $formData)
 {
+
   switch ($method) {
     case 'POST':
-      {
-
-      }
+      taskPostProvider($urlData, $formData);
       break;
     case 'PUT':
-      {
-
-      }
+      taskPutsProvider($urlData, $formData);
       break;
     case 'DELETE':
-      {
-
-      }
+      taskDeleteProvider($urlData);
       break;
     case 'GET':
-      {
-        tasksGetsProviders($urlData);
-
-      }
+      tasksGetsProviders($urlData);
       break;
   }
 
