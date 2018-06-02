@@ -9,10 +9,10 @@
 define('SALT_MAX_LENGTH',8);
 define('JSON_OPTIONS', JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
-$dbpass = "";
-$dblogin = "root";
-$dbhost = "127.0.0.1:3306";
-$dbname = "onecheck";
+$dbpass = "a79d4cd96345";
+$dblogin = "gb_modx_pavel";
+$dbhost = "mysql93.1gb.ru";
+$dbname = "gb_modx_pavel";
 
 date_default_timezone_set('Europe/Moscow');
 
