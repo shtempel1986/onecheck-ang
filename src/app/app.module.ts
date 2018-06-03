@@ -59,7 +59,7 @@ import {TasksService} from "./pages/tasks/tasks.service";
     AuthService,
     RestDataSource,
     RegistrationService,
-    {provide: REST_URL, useValue: 'http://onecheck.ogredi.ru/rest_api'},
+    {provide: REST_URL, useValue: 'http://ogredi.ru/onecheck_api'},
     MessagesService,
     TasksService
   ],
