@@ -43,7 +43,7 @@ class Registration
 
     $sessionExpires = date('Y-m-d H:i:s', strtotime('+1 year'));
 
-    $sql = "INSERT INTO onecheck.users 
+    $sql = "INSERT INTO users 
             (email, hash, salt, sessionToken, sessionExpires)  
             VALUE (
             '$this->email',

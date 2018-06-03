@@ -23,14 +23,22 @@ class Auth
     $sql = "SELECT * FROM users WHERE email = '$this->email'";
     $data = $link->query($sql);
 
+    if(!$data){
+      return new ErrorResponse('Ошибка БД: ' . $link->error);
+    }
+
     return !mysqli_num_rows($data);
   }
 
   function checkPassword(){
     global $link;
 
-    $sql = "SELECT * FROM onecheck.users WHERE email = '$this->email' LIMIT 1";
+    $sql = "SELECT * FROM users WHERE email = '$this->email' LIMIT 1";
     $data = $link->query($sql);
+
+    if(!$data){
+      return new ErrorResponse('Ошибка БД: ' . $link->error);
+    }
 
     $data = mysqli_fetch_object($data);
 
@@ -59,7 +67,7 @@ class Auth
     $sessionExpires = date('Y-m-d H:i:s', strtotime('+1 year'));
     global $link;
 
-    $sql = "UPDATE onecheck.users 
+    $sql = "UPDATE users 
             SET sessionToken = '$sessionToken',
             sessionExpires = '$sessionExpires' 
             WHERE email = '$this->email'";

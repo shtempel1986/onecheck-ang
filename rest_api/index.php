@@ -15,6 +15,7 @@ header('Content-Type: application/json');
 
 // Определяем метод запроса
 $method = $_SERVER['REQUEST_METHOD'];
+if($method === 'OPTIONS'){exit();}
 
 // Получаем данные из тела запроса
 $formData = getFormData($method);

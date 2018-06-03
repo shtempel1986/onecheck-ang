@@ -43,22 +43,26 @@ export class RestDataSource {
   }
 
   getData<T>(url: string): Observable<any>{
+    let encodedUrl = encodeURI(url);
     this.updateSessionToken();
-    return this.http.get<any>(`${this.url}/${url}`, this.paramsWithAuth);
+    return this.http.get<any>(`${this.url}/${encodedUrl}`, this.paramsWithAuth);
   }
 
   sendPutRequest(url: string, data): Observable<any>{
+    let encodedUrl = encodeURI(url);
     this.updateSessionToken();
-    return this.http.put(`${this.url}/${url}`, data, this.paramsWithAuth);
+    return this.http.put(`${this.url}/${encodedUrl}`, data, this.paramsWithAuth);
   }
 
   sendPostRequest<T>(url: string, data?): Observable<any> {
+    let encodedUrl = encodeURI(url);
     this.updateSessionToken();
-    return this.http.post<T>(`${this.url}/${url}`, data, this.paramsWithAuth);
+    return this.http.post<T>(`${this.url}/${encodedUrl}`, data, this.paramsWithAuth);
   }
 
   sendDeleteRequest<T>(url: string): Observable<any> {
+    let encodedUrl = encodeURI(url);
     this.updateSessionToken();
-    return this.http.delete<T>(`${this.url}/${url}`, this.paramsWithAuth);
+    return this.http.delete<T>(`${this.url}/${encodedUrl}`, this.paramsWithAuth);
   }
 }

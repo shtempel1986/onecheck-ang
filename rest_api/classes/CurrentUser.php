@@ -22,7 +22,7 @@ class CurrentUser extends User
   {
     global $link;
 
-    $sql = "SELECT * FROM onecheck.users WHERE email = '$email'";
+    $sql = "SELECT * FROM users WHERE email = '$email'";
     $data = $link->query($sql);
 
     if (!$data) {
@@ -38,7 +38,7 @@ class CurrentUser extends User
   {
     global $link;
 
-    $sql = "SELECT * FROM onecheck.users WHERE userId = '$userId' limit 1";
+    $sql = "SELECT * FROM users WHERE userId = '$userId' limit 1";
     $data = $link->query($sql);
     $data = mysqli_fetch_object($data);
 
@@ -61,7 +61,7 @@ class CurrentUser extends User
   static function checkUserId($userId){
     global $link;
 
-    $sql = "SELECT * FROM onecheck.users WHERE userId = '$userId' limit 1";
+    $sql = "SELECT * FROM users WHERE userId = '$userId' limit 1";
     $data = $link->query($sql);
     $data = mysqli_fetch_object($data);
     if(!$data){

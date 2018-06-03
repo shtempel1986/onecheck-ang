@@ -23,6 +23,9 @@ function route($method, $urlData, $formData)
     case 'GET':
       tasksGetsProviders($urlData);
       break;
+    case 'OPTIONS':
+      exit(1);
+      break;
   }
 
 //        exit(json_encode([
