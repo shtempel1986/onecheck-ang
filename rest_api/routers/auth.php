@@ -18,11 +18,11 @@ function route($method, $urlData, $formData)
     $auth = new Auth($email, $password);
 
     if($auth->checkEmail()){
-      return new ErrorResponse('Пользователь не найден');
+       new ErrorResponse('Пользователь не найден');
     }
 
     if(!$auth->checkPassword()){
-      return new ErrorResponse('Пароль не верен');
+       new ErrorResponse('Пароль не верен');
     }
 
     $currentUser = CurrentUser::getCurrentUserByEmail($email);

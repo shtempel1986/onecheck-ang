@@ -65,10 +65,12 @@ export class CalendarModel {
 
     let _str = this.activeDay.substring(0, lastSpace);
 
-    taskDay += ' ';
+    taskDay += '_';
+
+    _str = calendarConsts.rusMonthToNumber(_str);
 
     taskDay += _str;
-
+    taskDay = taskDay.replace(' ', '_');
     return taskDay;
   }
 }

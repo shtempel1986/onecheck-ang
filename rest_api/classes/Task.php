@@ -74,7 +74,7 @@ class Task
   {
     global $link;
     $sql = "UPDATE tasks SET taskCompleted = '$taskCompleted' 
-            WHERE userId = '$userId' AND taskId = '$taskId'";
+            WHERE userId = '$userId' AND taskId = '$taskId' AND taskDisplayed = true";
     $data = $link->query($sql);
     if (!$data) {
       new ErrorResponse('Ошибка БД');
@@ -87,7 +87,7 @@ class Task
     global $link;
 
     $sql = "UPDATE tasks SET taskDescription = '$taskDescription' 
-            WHERE userId = '$userId' AND taskId = '$taskId'";
+            WHERE userId = '$userId' AND taskId = '$taskId' AND taskDisplayed = true";
     $data = $link->query($sql);
 
     if (!$data) {

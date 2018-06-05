@@ -10,12 +10,15 @@ require_once 'requires.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS, PATCH');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization, Request-Method');
 header('Content-Type: application/json');
 
 // Определяем метод запроса
-$method = $_SERVER['REQUEST_METHOD'];
-if($method === 'OPTIONS'){exit();}
+$headers = apache_request_headers();
+$method = $headers['Request-Method'];
+if(!$method){
+  $method = $_SERVER['REQUEST_METHOD'];
+}
 
 // Получаем данные из тела запроса
 $formData = getFormData($method);
@@ -24,8 +27,8 @@ $formData = getFormData($method);
 function getFormData($method)
 {
 
-  $headers = apache_request_headers();
   if ($method === 'GET') return $_GET;
+  $headers = apache_request_headers();
 
   switch ($headers['Content-Type']) {
     //ЕСЛИ ПОЛУЧИЛИ JSON
@@ -62,7 +65,6 @@ function getFormData($method)
         $data[urldecode($item[0])] = urldecode($item[1]);
       }
     }
-    exit('Content-Type');
   }
   return $data;
 }

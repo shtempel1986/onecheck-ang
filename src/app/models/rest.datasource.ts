@@ -24,12 +24,13 @@ export class RestDataSource {
     };
   }
 
-  private updateSessionToken(){
+  private updateSessionToken(method: string= 'GET'){
     const sessionToken = this.authCheck.getSessionToken();
     this.paramsWithAuth = {
       headers: new HttpHeaders({
         'Authorization': sessionToken,
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Request-Method':method
       })
     };
   }
@@ -43,26 +44,22 @@ export class RestDataSource {
   }
 
   getData<T>(url: string): Observable<any>{
-    let encodedUrl = encodeURI(url);
     this.updateSessionToken();
-    return this.http.get<any>(`${this.url}/${encodedUrl}`, this.paramsWithAuth);
+    return this.http.get<any>(`${this.url}/${url}`, this.paramsWithAuth);
   }
 
   sendPutRequest(url: string, data): Observable<any>{
-    let encodedUrl = encodeURI(url);
-    this.updateSessionToken();
-    return this.http.put(`${this.url}/${encodedUrl}`, data, this.paramsWithAuth);
+    this.updateSessionToken('PUT');
+    return this.http.post(`${this.url}//${url}`, data, this.paramsWithAuth);
   }
 
   sendPostRequest<T>(url: string, data?): Observable<any> {
-    let encodedUrl = encodeURI(url);
-    this.updateSessionToken();
-    return this.http.post<T>(`${this.url}/${encodedUrl}`, data, this.paramsWithAuth);
+    this.updateSessionToken('POST');
+    return this.http.post<T>(`${this.url}/${url}`, data, this.paramsWithAuth);
   }
 
   sendDeleteRequest<T>(url: string): Observable<any> {
-    let encodedUrl = encodeURI(url);
-    this.updateSessionToken();
-    return this.http.delete<T>(`${this.url}/${encodedUrl}`, this.paramsWithAuth);
+    this.updateSessionToken('DELETE');
+    return this.http.post<T>(`${this.url}/${url}`,null, this.paramsWithAuth);
   }
 }

@@ -55,7 +55,8 @@ let calendarConsts = {
     let now = new Date();
     let season: number;
 
-    season = now.getMonth();
+    season = now.getMonth() + 1;
+
 
     if (season === 12) {
       todaySeasonTitle = this.seasonsNames[3] + ' ';
@@ -76,6 +77,16 @@ let calendarConsts = {
     todayTitle += this.dayNames[now.getDay()];
 
     return todayTitle;
+  },
+  rusMonthToNumber: function (str):string {
+    let _str: string;
+    _str = str;
+
+    for(let idx in this.monthNames){
+      _str = _str.replace(this.monthNames[idx],idx)
+    }
+
+    return _str;
   }
 };
 
