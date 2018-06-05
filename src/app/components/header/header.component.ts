@@ -1,6 +1,7 @@
 import {Component} from "@angular/core"
 import {AuthCheckService} from "../../auth/auth-check.service";
 import {Router} from "@angular/router";
+import {CalendarModel} from "../../models/calendar.model";
 
 @Component({
   selector:'header-component',
@@ -10,7 +11,8 @@ import {Router} from "@angular/router";
 export class HeaderComponent{
 
   constructor(private authCheck: AuthCheckService,
-              public router: Router){
+              public router: Router,
+              public calendar: CalendarModel){
 
   }
 

@@ -6,6 +6,11 @@
       <li class="nav-item">
         <a routerLink="seasons" class="nav-link" [routerLinkActive]="'active'">Времена года</a>
       </li>
+      <li>
+        <a routerLink="tasks" class="nav-link"
+           (click)="calendar.setTodayActiveDay()"
+           [routerLinkActive]="'d-none'">Сегодня</a>
+      </li>
     </ul>
     <button (click)="logOut()"
             *ngIf="(router.url !== '/auth') && (router.url !== '/registration')"

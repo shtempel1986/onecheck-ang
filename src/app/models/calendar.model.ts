@@ -56,6 +56,12 @@ export class CalendarModel {
     this.activeDay = dayTitle;
   }
 
+  setTodayActiveDay() {
+    this.activeSeason = new Season(calendarConsts.getTodaySeasonTitle());
+    this.activeWeek = new Week(calendarConsts.getCurrentWeek());
+    this.activeDay = calendarConsts.getTodayTitle();
+  }
+
   getTaskDay(): string {
     let lastSpace = this.activeWeek.weekTitle.lastIndexOf(' ');
 
