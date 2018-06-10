@@ -15,9 +15,15 @@ header('Content-Type: application/json');
 
 // Определяем метод запроса
 $headers = apache_request_headers();
-$method = $headers['Request-Method'];
+$method = null;
+if(isset($headers['Request-Method'])){
+  $method = $headers['Request-Method'];
+}
 if(!$method){
   $method = $_SERVER['REQUEST_METHOD'];
+}
+if($method === 'OPTIONS'){
+  exit(0);
 }
 
 // Получаем данные из тела запроса

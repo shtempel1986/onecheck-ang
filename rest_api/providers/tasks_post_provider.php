@@ -25,8 +25,11 @@ function taskPostProvider($urlData, $formData)
   if(!$taskDay){
     return new ErrorResponse('не хватает данных');
   }
-
-  $response = Task::addTask($userId, $taskDay);
+  if(!$formData){
+    $response = Task::addTask($userId, $taskDay);
+  } else {
+    $response = Task::addTaskWithData($userId, $taskDay, $formData);
+  }
   $response = json_encode($response);
 
   exit($response);

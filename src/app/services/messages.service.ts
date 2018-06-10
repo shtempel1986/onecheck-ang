@@ -29,7 +29,7 @@ export class MessagesService {
         self.showMessageWindow = false;
         self.showMessage = false;
         self.message = '';
-      }, CONSTS.MESSAGES_DELAY);
+      }, CONSTS.MESSAGES_DELAY*10);
       return;
     }
     this.showProgress = false;

@@ -7,6 +7,8 @@ import {DaysComponent} from "./pages/days/days.component"
 import {TasksComponent} from "./pages/tasks/tasks.component"
 import {AuthComponent} from "./components/auth/auth.component";
 import {AuthCanActivateService} from "./auth-can-activate.service";
+import {WeeklyTasksComponent} from "./pages/weekly-tasks/weekly-tasks.component";
+import {WeekDayComponent} from "./pages/week-day/week-day.component";
 
 const routes: Routes = [
   {
@@ -41,6 +43,16 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent
+  },
+  {
+    path: 'weekly-tasks',
+    component: WeeklyTasksComponent,
+    canActivate: [AuthCanActivateService]
+  },
+  {
+    path: 'weekly-tasks/:day',
+    component: WeekDayComponent,
+    canActivate: [AuthCanActivateService]
   }
 ];
 

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from "../models/User";
 import {Router} from "@angular/router";
-import {s} from "@angular/core/src/render3";
 
 
 @Injectable()

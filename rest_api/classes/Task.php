@@ -112,6 +112,31 @@ class Task
     return $newTask;
   }
 
+  /**
+   * @param $userId string
+   * @param $taskDay string
+   * @param $task Task
+   * @return null|object|Task
+   */
+  static function addTaskWithData($userId, $taskDay, $task)
+  {
+    global $link;
+
+    $sql =
+      /** @lang MySQL */
+      "INSERT INTO tasks (userId, taskDay, gb_onecheck.tasks.taskDescription) 
+          VALUES ('$userId', '$taskDay', '$task->taskDescription')";
+    $data = $link->query($sql);
+
+    if (!$data) {
+      new ErrorResponse('Ошибка БД: ' . $link->error);
+    }
+
+    $newTaskId = $link->insert_id;
+    $newTask = self::getTask($userId, $taskDay, $newTaskId);
+    return $newTask;
+  }
+
   static function deleteTask($userId, $taskDay, $taskId){
     global $link;
 

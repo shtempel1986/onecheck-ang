@@ -24,14 +24,13 @@ export class AuthService {
       this.messagesService.startProgress();
       this.restData.authRequest(this.toObject()).subscribe((res) => {
           const currentUser = new CurrentUser(res);
-          console.log(this.router);
           currentUser.setCurrentUserInStorage();
           this.router.navigateByUrl('seasons');
           this.messagesService.stopProgress();
         },
         reason => {
           console.log(reason);
-          const message = (typeof reason.error === 'string') ? reason.error : 'Ошибка';
+          const message = JSON.stringify(reason.headers) || 'Ошибка';
           this.messagesService.stopProgress(message);
         });
     }

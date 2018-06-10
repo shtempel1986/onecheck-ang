@@ -1,0 +1,15 @@
+<div class="container-fluid bg-light pt-1 pb-1">
+
+  <h1 class="text-center mt-2 mb-3 text-capitalize">
+    {{currentWeekDay}}
+    <button class="week-day__add ml-5 text-info"
+            (click)="addWeeklyTask()"
+            title="Добавить еженедельное задание">
+      <i class="fa fa-calendar-plus"></i>
+    </button>
+  </h1>
+  <div class="tasks-wrapper">
+    <app-weekly-task *ngFor="let weeklyTask of weeklyTaskList"
+                     [weeklyTask]="weeklyTask"></app-weekly-task>
+  </div>
+</div>

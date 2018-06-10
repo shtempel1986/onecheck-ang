@@ -1,6 +1,11 @@
 <div class="container-fluid bg-light pt-1 pb-1">
 
-  <h1 class="text-center mt-2 mb-3">{{calendar.activeDay}}</h1>
+  <h1 class="text-center mt-2 mb-3">
+    <a routerLink="days" class="">
+      <i class=""></i>
+    </a>
+    {{calendar.activeDay}}
+  </h1>
   <div class="tasks-wrapper">
     <task-component *ngFor="let task of tasks"
                     [taskModel]="task"></task-component>

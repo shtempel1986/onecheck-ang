@@ -1,20 +1,26 @@
-<div class="container-fluid bg-dark p-1">
+<div class="container-fluid bg-dark p-2 header">
   <div class="navbar navbar-dark navbar-expand">
-    <h1 class="navbar-brand text-danger mb-0">Onecheck</h1>
-
+    <a routerLink="" class="navbar-brand text-danger mb-0 header__logo">Onecheck</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a routerLink="seasons" class="nav-link" [routerLinkActive]="'active'">Времена года</a>
+        <a routerLink="seasons"
+           class="nav-link header__link"
+           [routerLinkActive]="'active'">Времена года</a>
       </li>
       <li>
-        <a routerLink="tasks" class="nav-link"
+        <a routerLink="tasks" class="nav-link header__link"
            (click)="calendar.setTodayActiveDay()"
            [routerLinkActive]="'d-none'">Сегодня</a>
+      </li>
+      <li class="pl-5">
+        <a routerLink="weekly-tasks"
+           class="nav-link header__link text-info"
+           [routerLinkActive]="'active'">Еженедельные дела</a>
       </li>
     </ul>
     <button (click)="logOut()"
             *ngIf="(router.url !== '/auth') && (router.url !== '/registration')"
-        class="btn btn-outline-danger">Выход</button>
+        class="btn btn-outline-danger header__button">Выход</button>
   </div>
 
 </div>

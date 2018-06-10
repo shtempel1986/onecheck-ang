@@ -36,10 +36,10 @@ export class TasksService {
     return this.dataSource.sendPutRequest(`tasks/${currentUser.userId}/${taskDay}/${task.taskId}/description`, task.taskDescription);
   }
 
-  sendAddTaskRequest(){
+  sendAddTaskRequest(task?:TaskModel){
     const currentUser = this.auth.getCurrentUser();
     const taskDay = this.calendar.getTaskDay();
-    return this.dataSource.sendPostRequest<TaskModel>(`tasks/${currentUser.userId}/${taskDay}`).subscribe(res => {
+    return this.dataSource.sendPostRequest<TaskModel>(`tasks/${currentUser.userId}/${taskDay}`, task).subscribe(res => {
         const newTask = TaskModel.taskModelFromObject(res);
         newTask.focus = true;
         if(this.tasksListener){

@@ -28,6 +28,10 @@ import {RegistrationService} from "./auth/registration.service";
 import {MessagesService} from "./services/messages.service";
 import {MessagesComponent} from './components/messages/messages.component';
 import {TasksService} from "./pages/tasks/tasks.service";
+import {WeeklyTasksComponent} from './pages/weekly-tasks/weekly-tasks.component';
+import {WeekDayComponent} from './pages/week-day/week-day.component';
+import {WeeklyTasksService} from "./services/weekly-tasks.service";
+import { WeeklyTaskComponent } from './components/weekly-task/weekly-task.component';
 
 
 @NgModule({
@@ -43,7 +47,10 @@ import {TasksService} from "./pages/tasks/tasks.service";
     TaskComponent,
     AuthComponent,
     MessagesComponent,
-    Autosize
+    Autosize,
+    WeeklyTasksComponent,
+    WeekDayComponent,
+    WeeklyTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +66,11 @@ import {TasksService} from "./pages/tasks/tasks.service";
     AuthService,
     RestDataSource,
     RegistrationService,
-    {provide: REST_URL, useValue: 'http://ogredi.ru/onecheck_api'},
+    // {provide: REST_URL, useValue: 'http://ogredi.ru/onecheck_api'},
+    {provide: REST_URL, useValue: 'http://onecheck/rest_api'},
     MessagesService,
-    TasksService
+    TasksService,
+    WeeklyTasksService
   ],
   bootstrap: [AppComponent]
 })

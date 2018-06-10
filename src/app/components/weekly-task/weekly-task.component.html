@@ -1,0 +1,12 @@
+<div class="weekly-task">
+  <div class="input-group mb-3">
+    <textarea [(ngModel)]="weeklyTask.weeklyTaskDescription"
+              autosize title="weeklyTask"
+              (change)="changeDescription()"
+              class="form-control weekly-task__textarea"></textarea>
+    <button (click)="deleteWeeklyTask()"
+        class="weekly-task__delete text-danger btn-outline-danger btn">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>

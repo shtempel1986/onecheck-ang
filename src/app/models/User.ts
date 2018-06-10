@@ -1,6 +1,6 @@
 export class User {
   constructor(public email: string,
-              public userId: string | number,
+              public userId: string,
               public sessionToken: string,
               public sessionExpires: Date) {
 

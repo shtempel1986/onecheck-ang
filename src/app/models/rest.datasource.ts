@@ -50,7 +50,12 @@ export class RestDataSource {
 
   sendPutRequest(url: string, data): Observable<any>{
     this.updateSessionToken('PUT');
-    return this.http.post(`${this.url}//${url}`, data, this.paramsWithAuth);
+    return this.http.post(`${this.url}/${url}`, data, this.paramsWithAuth);
+  }
+
+  sendPatchRequest(url: string, data): Observable<any>{
+    this.updateSessionToken('PATCH');
+    return this.http.post(`${this.url}/${url}`, data, this.paramsWithAuth);
   }
 
   sendPostRequest<T>(url: string, data?): Observable<any> {

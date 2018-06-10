@@ -1,0 +1,14 @@
+<div class="container-fluid bg-light">
+  <h1 class="text-center mt-2">
+    Список дней
+  </h1>
+  <ul class="list-group">
+    <li *ngFor="let day of dayList "
+        class="list-group-item weeks__item d-flex justify-content-between bg-info">
+      <a [routerLink]="['/weekly-tasks', day]"
+          class="season__link d-block font-weight-bold text-light">
+        {{day}}
+      </a>
+    </li>
+  </ul>
+</div>
