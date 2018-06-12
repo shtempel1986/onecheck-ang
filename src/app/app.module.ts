@@ -33,6 +33,7 @@ import {WeekDayComponent} from './pages/week-day/week-day.component';
 import {WeeklyTasksService} from "./services/weekly-tasks.service";
 import { WeeklyTaskComponent } from './components/weekly-task/weekly-task.component';
 import {ErrorHandlersService} from "./services/error-handlers.service";
+import {OnlyLatin} from "./direcives/anly-latin.directive";
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import {ErrorHandlersService} from "./services/error-handlers.service";
     Autosize,
     WeeklyTasksComponent,
     WeekDayComponent,
-    WeeklyTaskComponent
+    WeeklyTaskComponent,
+    OnlyLatin
   ],
   imports: [
     BrowserModule,

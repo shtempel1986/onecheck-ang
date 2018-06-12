@@ -3,7 +3,12 @@
     <div class="auth col-6">
       <h1 class="text-center">Регистрация</h1>
       <div class="form-group">
-        <input placeholder="email" [(ngModel)]="registration.email" class="form-control">
+        <input placeholder="email"
+               type="email"
+               email
+               only-latin
+               [(ngModel)]="registration.email"
+               class="form-control">
       </div>
       <div class="form-group">
         <input placeholder="пароль" [(ngModel)]="registration.password" class="form-control" type="password">

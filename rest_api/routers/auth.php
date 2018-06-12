@@ -21,11 +21,11 @@ function route($method, $urlData, $formData)
        new ErrorResponse('Пользователь не найден');
     }
 
-    if(!$auth->checkPassword()){
+    $currentUser = $auth->checkPassword();
+
+    if(!$currentUser){
        new ErrorResponse('Пароль не верен');
     }
-
-    $currentUser = CurrentUser::getCurrentUserByEmail($email);
 
     exit(json_encode($currentUser));
 

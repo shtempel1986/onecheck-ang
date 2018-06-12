@@ -9,9 +9,9 @@ import {MessagesService} from "../services/messages.service";
 @Injectable()
 export class RegistrationService {
 
-  public email: string = 'o_gredi@mail.ru';
-  public password: string = '123456';
-  public confirmPassword: string = '123456';
+  public email: string = '';
+  public password: string = '';
+  public confirmPassword: string = '';
 
   constructor(public restData: RestDataSource,
               public router: Router,

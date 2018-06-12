@@ -3,7 +3,12 @@
     <div class="auth col-md-6 col-sm-12">
       <h1 class="text-center">Авторизация</h1>
       <div class="form-group">
-        <input placeholder="email" [(ngModel)]="auth.email" class="form-control">
+        <input placeholder="email"
+               type="email"
+               [(ngModel)]="auth.email"
+               email
+               only-latin
+               class="form-control">
       </div>
       <div class="form-group">
         <input placeholder="пароль" [(ngModel)]="auth.password" class="form-control" type="password">

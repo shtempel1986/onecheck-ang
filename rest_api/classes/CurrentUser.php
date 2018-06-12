@@ -8,13 +8,17 @@
 
 class CurrentUser extends User
 {
-  public $sessionToken;
-  public $sessionExpires;
+  public $sessionToken = null;
+  public $sessionExpires = null;
 
   function __construct($userData)
   {
-    $this->sessionToken = $userData->sessionToken;
-    $this->sessionExpires = $userData->sessionExpires;
+    if (isset($userData->sessionToken)) {
+      $this->sessionToken = $userData->sessionToken;
+    }
+    if (isset($userData->sessionExpires)) {
+      $this->sessionExpires = $userData->sessionExpires;
+    }
     parent::__construct($userData);
   }
 
@@ -46,30 +50,46 @@ class CurrentUser extends User
 
     $now = time();
 
-    $sessionExpires = strtotime($currentUser->sessionExpires);
+    $sessions = json_decode($currentUser->sessionToken);
 
-    if ($sessionExpires - $now < 0) {
-      return new ErrorResponse('Время сессии истекло', 403);
+    $sessions = (array)$sessions;
+
+    if (!$sessions) {
+      new ErrorResponse('Ошибка авторизации 1', 403);
+    }
+    //перебор и удаление истекших
+    foreach ($sessions as $token => $tokenExpires) {
+      $tokenExpires = strtotime($tokenExpires);
+      if ($now > $tokenExpires) {
+        unset($sessions[$token]);
+      }
     }
 
-    if (!hash_equals($currentUser->sessionToken, $sessionToken)) {
-      return new ErrorResponse('Неверный токен', 403);
+    if (!isset($sessions[$sessionToken])) {
+      new ErrorResponse(json_encode($sessions) . ' ' . $sessionToken, 403);
     }
-    return true;
+
   }
 
-  static function checkUserId($userId){
+  static function checkUserId($userId)
+  {
     global $link;
 
     $sql = "SELECT * FROM users WHERE userId = '$userId' limit 1";
     $data = $link->query($sql);
     $data = mysqli_fetch_object($data);
-    if(!$data){
+
+    if (!$data) {
+      new ErrorResponse('Ошибка бд: ' . $link->error);
+    }
+
+    if (!$data) {
       new ErrorResponse('Пользователь не найден', 404);
     }
   }
 
-  static function checkUserAuth($userId){
+  static function checkUserAuth($userId)
+  {
     $headers = getallheaders();
     $sessionToken = $headers['Authorization'];
     CurrentUser::checkUserId($userId);

@@ -43,14 +43,17 @@ class Registration
 
     $sessionExpires = date('Y-m-d H:i:s', strtotime('+1 year'));
 
+    $sessions = array($sessionToken=>$sessionExpires);
+
+    $sessions = json_encode($sessions);
+
     $sql = "INSERT INTO users 
-            (email, hash, salt, sessionToken, sessionExpires)  
+            (email, hash, salt, sessionToken)  
             VALUE (
             '$this->email',
             '$hash',
             '$salt',
-            '$sessionToken',
-            '$sessionExpires'
+            '$sessions'
             )";
     $data = $link->query($sql);
 

@@ -23,6 +23,10 @@ export class ErrorHandlersService {
         this.messages.showErrorMessage('Ошибка сервера: '+ err.error);
       }
         break;
+      case 404: {
+        this.messages.showErrorMessage('Объект не найден на сервере: '+ err.error);
+      }
+        break;
     }
   }
 

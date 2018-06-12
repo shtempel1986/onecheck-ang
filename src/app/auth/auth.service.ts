@@ -29,8 +29,7 @@ export class AuthService {
           this.messagesService.stopProgress();
         },
         reason => {
-          console.log(reason);
-          const message = JSON.stringify(reason.headers) || 'Ошибка';
+          const message = reason.error || 'Ошибка';
           this.messagesService.stopProgress(message);
         });
     }

@@ -54,7 +54,7 @@ class Auth
     $result = hash_equals($hash, $userHash);
 
     if($result){
-      $this->updateToken();
+      $result = $this->updateToken();
     }
 
     return $result;
@@ -67,10 +67,37 @@ class Auth
     $sessionExpires = date('Y-m-d H:i:s', strtotime('+1 year'));
     global $link;
 
-    $sql = "UPDATE users 
-            SET sessionToken = '$sessionToken',
-            sessionExpires = '$sessionExpires' 
-            WHERE email = '$this->email'";
-    $link->query($sql);
+    $sql = /** @lang MySQL */
+      "SELECT * FROM users WHERE email = '$this->email'";
+    $data = $link->query($sql);
+
+    if(!$data){
+      new ErrorResponse('Ошибка бд: '. $link->error);
+    }
+
+    $data = mysqli_fetch_object($data);
+
+    $sessions = json_decode($data->sessionToken);
+
+    $currentUser = new CurrentUser($data);
+
+    $sessions = (array) $sessions;
+
+    $sessions[$sessionToken] = $sessionExpires;
+
+    $sessions = json_encode($sessions);
+
+    $sql = /** @lang MySQL */
+      "UPDATE users set sessionToken = '$sessions'";
+    $data = $link->query($sql);
+
+    if(!$data){
+      new ErrorResponse('Ошибка бд: '. $link->error);
+    }
+
+    $currentUser->sessionToken = $sessionToken;
+    $currentUser->sessionExpires = $sessionExpires;
+    return $currentUser;
+
   }
 }
