@@ -1,0 +1,16 @@
+.tasks
+	&-list
+		font-size: 40px
+		counter-reset: tasks-list
+		li
+			task-component
+				width: 100%
+			&::before
+				counter-increment: tasks-list
+				content: counter(tasks-list)
+				flex-shrink: 0
+				display: flex
+				align-items: center
+				font-weight: bold
+				margin-right: 10px
+				margin-bottom: 1rem

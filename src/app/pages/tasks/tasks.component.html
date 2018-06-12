@@ -7,7 +7,10 @@
     {{calendar.activeDay}}
   </h1>
   <div class="tasks-wrapper">
-    <task-component *ngFor="let task of tasks"
-                    [taskModel]="task"></task-component>
+    <ol class="tasks-list list-unstyled">
+      <li class="d-flex " *ngFor="let task of tasks">
+        <task-component [taskModel]="task"></task-component>
+      </li>
+    </ol>
   </div>
 </div>
