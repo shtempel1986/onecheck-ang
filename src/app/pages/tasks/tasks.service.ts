@@ -6,6 +6,7 @@ import {CalendarModel} from "../../models/calendar.model";
 import {TaskModel} from "../../components/task/task.model";
 import {map} from "rxjs/operators";
 import {Subscription} from "rxjs/Subscription";
+import {ErrorHandlersService} from "../../services/error-handlers.service";
 
 
 @Injectable()
@@ -15,7 +16,8 @@ export class TasksService {
 
   constructor(private dataSource: RestDataSource,
               private auth: AuthCheckService,
-              private calendar: CalendarModel) {
+              private calendar: CalendarModel,
+              private errorHandlers: ErrorHandlersService) {
   }
 
   getTasks<TaskModel>(): Observable<TaskModel[]> {
@@ -47,7 +49,7 @@ export class TasksService {
         }
       }
       , reason => {
-        console.log(reason);
+        this.errorHandlers.httpErrorHandler(reason)
       });
   }
   sendDeleteTaskRequest(taskId:string) {
@@ -59,7 +61,7 @@ export class TasksService {
         }
       }
       , reason => {
-        console.log(reason);
+        this.errorHandlers.httpErrorHandler(reason)
       });
   }
 

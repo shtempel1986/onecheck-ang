@@ -7,6 +7,7 @@ import {
 } from "@angular/core"
 import {TaskModel} from "./task.model";
 import {TasksService} from "../../pages/tasks/tasks.service";
+import {ErrorHandlersService} from "../../services/error-handlers.service";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class TaskComponent implements OnInit {
   private oldDescription: string;
 
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService,
+              private errorHandlers: ErrorHandlersService) {
   }
 
   ngOnInit() {
@@ -47,7 +49,7 @@ export class TaskComponent implements OnInit {
       reason => {
         this.updateInProgress = false;
         this.taskModel.taskCompleted = !this.taskModel.taskCompleted;
-        console.log(reason);
+        this.errorHandlers.httpErrorHandler(reason)
       });
   }
 
@@ -62,7 +64,7 @@ export class TaskComponent implements OnInit {
           this.updateInProgress = false;
           this.taskModel.taskCompleted = !this.taskModel.taskCompleted;
           this.taskModel.taskDescription = this.oldDescription;
-          console.log(reason);
+          this.errorHandlers.httpErrorHandler(reason)
         });
     }
   }

@@ -3,6 +3,7 @@ import {RestDataSource} from "../models/rest.datasource";
 import {WeeklyTask} from "../models/WeeklyTask";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
+import {ErrorHandlersService} from "./error-handlers.service";
 
 @Injectable()
 export class WeeklyTasksService {
@@ -11,7 +12,8 @@ export class WeeklyTasksService {
   private isUpdated: boolean = false;
   public weeklyTaskListStorage: WeeklyTask[];
 
-  constructor(private dataService: RestDataSource) {
+  constructor(private dataService: RestDataSource,
+              private errorHandlers: ErrorHandlersService) {
   }
 
   updateWeeklyTasks(userId: string) {
@@ -22,7 +24,7 @@ export class WeeklyTasksService {
           this.weeklyTaskListStorage = weeklyTaskList;
         },
         reason => {
-          console.log(reason);
+          this.errorHandlers.httpErrorHandler(reason)
         });
     }
   }
@@ -58,7 +60,7 @@ export class WeeklyTasksService {
 
       },
       reason => {
-        console.log(reason);
+        this.errorHandlers.httpErrorHandler(reason)
       });
   }
 
@@ -66,7 +68,7 @@ export class WeeklyTasksService {
     return this.dataService
       .sendPatchRequest(
         `weeklyTasks/${weeklyTask.userId}/${weeklyTask.weeklyTaskId}/description`,
-            weeklyTask.weeklyTaskDescription);
+        weeklyTask.weeklyTaskDescription);
   }
 
 }
