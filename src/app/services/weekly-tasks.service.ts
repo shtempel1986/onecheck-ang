@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {RestDataSource} from "../models/rest.datasource";
 import {WeeklyTask} from "../models/WeeklyTask";
-import {Observable, ObservableInput} from "rxjs/Observable";
+import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
-import {catchError} from "rxjs/operators";
 
 @Injectable()
 export class WeeklyTasksService {
@@ -23,7 +22,6 @@ export class WeeklyTasksService {
           this.weeklyTaskListStorage = weeklyTaskList;
         },
         reason => {
-          this.weeklyTaskList.error(reason);
           console.log(reason);
         });
     }
@@ -57,7 +55,7 @@ export class WeeklyTasksService {
           this.weeklyTaskListStorage
             .filter(value => value.weeklyTaskId !== weeklyTaskId);
         this.weeklyTaskList.next(this.weeklyTaskListStorage);
-        console.log(this.weeklyTaskListStorage);
+
       },
       reason => {
         console.log(reason);

@@ -1,5 +1,6 @@
 <div class="popup-wrapper" *ngIf="messagesService.showMessageWindow">
-  <div class="popup-container modal-content">
+  <div [class.text-danger]="messagesService.error"
+      class="popup-container modal-content ">
     <div class="popup__message modal-title" *ngIf="messagesService.showMessage">
       {{messagesService.message}}
     </div>

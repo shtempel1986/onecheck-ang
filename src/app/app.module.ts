@@ -32,6 +32,7 @@ import {WeeklyTasksComponent} from './pages/weekly-tasks/weekly-tasks.component'
 import {WeekDayComponent} from './pages/week-day/week-day.component';
 import {WeeklyTasksService} from "./services/weekly-tasks.service";
 import { WeeklyTaskComponent } from './components/weekly-task/weekly-task.component';
+import {ErrorHandlersService} from "./services/error-handlers.service";
 
 
 @NgModule({
@@ -66,11 +67,12 @@ import { WeeklyTaskComponent } from './components/weekly-task/weekly-task.compon
     AuthService,
     RestDataSource,
     RegistrationService,
-    // {provide: REST_URL, useValue: 'http://ogredi.ru/onecheck_api'},
-    {provide: REST_URL, useValue: 'http://onecheck/rest_api'},
+    {provide: REST_URL, useValue: 'http://ogredi.ru/onecheck_api'},
+    // {provide: REST_URL, useValue: 'http://onecheck/rest_api'},
     MessagesService,
     TasksService,
-    WeeklyTasksService
+    WeeklyTasksService,
+    ErrorHandlersService
   ],
   bootstrap: [AppComponent]
 })

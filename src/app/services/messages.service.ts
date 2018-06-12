@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {v} from "@angular/core/src/render3";
 import {CONSTS} from "../models/Consts";
 
 @Injectable()
@@ -9,6 +8,7 @@ export class MessagesService {
   public showMessage: boolean = false;
   public message: string;
   public showProgress: boolean = false;
+  public error: boolean = false;
 
   constructor() {
   }
@@ -19,21 +19,34 @@ export class MessagesService {
   }
 
   stopProgress(message: string | null = null): void {
-    const self = this;
-    if(message){
+
+    if (message) {
       this.message = message;
       this.showMessage = true;
       this.showProgress = false;
-      setTimeout(()=>{
-        self.showProgress = false;
-        self.showMessageWindow = false;
-        self.showMessage = false;
-        self.message = '';
-      }, CONSTS.MESSAGES_DELAY*10);
+      setTimeout(() => {
+        this.showProgress = false;
+        this.showMessageWindow = false;
+        this.showMessage = false;
+        this.message = '';
+      }, CONSTS.MESSAGES_DELAY);
       return;
     }
     this.showProgress = false;
     this.showMessageWindow = false;
+  }
+
+  showErrorMessage(message: string) {
+    this.error = true;
+    this.message = message;
+    this.showMessageWindow = true;
+    this.showMessage = true;
+    setTimeout(() => {
+      this.showMessageWindow = false;
+      this.showMessage = false;
+      this.error = false;
+      this.message = '';
+    }, CONSTS.MESSAGES_DELAY);
   }
 
 }

@@ -5,6 +5,7 @@ import {TasksService} from "./tasks.service";
 import {WeeklyTasksService} from "../../services/weekly-tasks.service";
 import {Subscription} from "rxjs/Subscription";
 import {WeeklyTask} from "../../models/WeeklyTask";
+import {ErrorHandlersService} from "../../services/error-handlers.service";
 
 @Component({
   selector: 'tasks',
@@ -19,7 +20,8 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   constructor(public calendar: CalendarModel,
               private tasksService: TasksService,
-              private weeklyTasksService: WeeklyTasksService) {
+              private weeklyTasksService: WeeklyTasksService,
+              private errorHandlers: ErrorHandlersService) {
   }
 
   ngOnInit() {
@@ -67,38 +69,29 @@ export class TasksComponent implements OnInit, OnDestroy {
           this.taskUpdated = true;
           this.checkWeeklyTasks();
         },
-        reason => {
-          console.log(reason);
-        });
+        reason => this.errorHandlers.httpErrorHandler(reason));
   }
 
-  checkWeeklyTasks(){
-    // if (this.tasks.length === 0) {
-    //   this.tasksService.sendAddTaskRequest();
-    // } else {
-    //   //фокус на последнем элементе
-    //   this.tasks[this.tasks.length - 1].focus = true;
-    // }
-
-    const currentWeekDay : string= this.calendar.activeDay.split(' ')[2];
-    const taskDay:string = this.calendar.getTaskDay();
-    if(this.weeklyTaskList && this.taskUpdated){
+  checkWeeklyTasks() {
+    const currentWeekDay: string = this.calendar.activeDay.split(' ')[2];
+    const taskDay: string = this.calendar.getTaskDay();
+    if (this.weeklyTaskList && this.taskUpdated) {
       //фильтрация по дню
-      let _wtl:WeeklyTask[] = this.weeklyTaskList
+      let _wtl: WeeklyTask[] = this.weeklyTaskList
         .filter(value => value.weeklyTaskDay === currentWeekDay);
       //фильтрация по наличию в текущем списке
-      for(let _t of this.tasks){
+      for (let _t of this.tasks) {
         _wtl = _wtl
           .filter(value => value.weeklyTaskDescription.toLowerCase() !== _t.taskDescription.toLowerCase());
       }
-      for(let _wt of _wtl){
+      for (let _wt of _wtl) {
         let newTask = new TaskModel(taskDay);
         newTask.taskDescription = _wt.weeklyTaskDescription;
         this.tasksService.sendAddTaskRequest(newTask);
       }
-      if(_wtl.length === 0){
-          //фокус на последнем элементе
-          this.tasks[this.tasks.length - 1].focus = true;
+      if (_wtl.length === 0) {
+        //фокус на последнем элементе
+        this.tasks[this.tasks.length - 1].focus = true;
       }
     }
   }
