@@ -1,5 +1,9 @@
 <div class="container-fluid bg-light">
-  <h1 class="text-center mt-2">{{calendar.activeSeason.seasonTitle}}</h1>
+  <h1 class="text-center mt-2">
+    <a routerLink="/seasons" class="link_back text-info">
+      <i class="fa fa-arrow-circle-left"></i>
+    </a>
+    {{calendar.activeSeason.seasonTitle}}</h1>
   <ul class="list-group">
     <li class="list-group-item weeks__item d-flex justify-content-between bg-info"
         *ngFor="let weekLink of weeksList"
