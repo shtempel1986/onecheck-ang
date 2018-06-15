@@ -17,6 +17,7 @@ export class CalendarModel {
   public activeSeason: Season = new Season(calendarConsts.getTodaySeasonTitle());
   public activeWeek: Week = new Week(calendarConsts.getCurrentWeek());
   public activeDay: string = calendarConsts.getTodayTitle();
+  private activeDayInDate: Date;
 
   public todaySeasonTitle: string = calendarConsts.getTodaySeasonTitle();
   public todayWeekTitle: string = calendarConsts.getCurrentWeek();
@@ -63,9 +64,9 @@ export class CalendarModel {
   }
 
   getTaskDay(): string {
-    let lastSpace = this.activeWeek.weekTitle.lastIndexOf(' ');
+    let lastSpace;
 
-    let taskDay = this.activeWeek.weekTitle.substr(lastSpace + 1);
+    let taskDay = this.getActiveDate().getFullYear() + '';
 
     lastSpace = this.activeDay.lastIndexOf(' ');
 
@@ -77,7 +78,25 @@ export class CalendarModel {
 
     taskDay += _str;
     taskDay = taskDay.replace(' ', '_');
+    console.log(this.getActiveDate());
     console.log(this);
     return taskDay;
   }
+
+  getActiveDate(){
+    let activeDate = new Date(this.activeWeek.weekStart);
+
+    let numberInWeek: number = 0;
+
+    this.activeWeek.daysList.map((el,idx)=>{
+      if(this.activeDay === el){
+        numberInWeek = idx;
+      }
+    });
+
+    activeDate.setTime(activeDate.getTime() + numberInWeek * calendarConsts.day);
+
+    return activeDate;
+  }
+
 }

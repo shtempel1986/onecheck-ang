@@ -8,7 +8,7 @@ const MONTHNANES = calendarConsts.monthNames;
 export default class Week {
   public daysList: Array<string> = [];
 
-  private weekStart: Date;
+  public weekStart: Date;
   private weekEnd: Date;
 
   constructor(public weekTitle: string) {
