@@ -17,6 +17,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   public unsubscribe: Array<Subscription> = [];
   private weeklyTaskList: Array<WeeklyTask>;
   private taskUpdated: boolean = false;
+  public loading: boolean;
 
   constructor(public calendar: CalendarModel,
               private tasksService: TasksService,
@@ -25,6 +26,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loading = true;
+
     this.getTasks();
     this.tasksService.updateTask(task => {
       this.tasks.push(task);
@@ -61,6 +64,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   getTasks() {
     this.tasksService.getTasks<TaskModel>()
       .subscribe(tasks => {
+          this.loading = false;
+
           let _tasks: TaskModel[] = [];
           for (let task of tasks) {
             _tasks.push(TaskModel.taskModelFromObject(task))
@@ -69,7 +74,10 @@ export class TasksComponent implements OnInit, OnDestroy {
           this.taskUpdated = true;
           this.checkWeeklyTasks();
         },
-        reason => this.errorHandlers.httpErrorHandler(reason));
+        reason => {
+          this.loading = false;
+          return this.errorHandlers.httpErrorHandler(reason)
+        });
   }
 
   checkWeeklyTasks() {

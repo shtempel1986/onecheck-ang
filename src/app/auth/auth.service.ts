@@ -29,7 +29,7 @@ export class AuthService {
           this.messagesService.stopProgress();
         },
         reason => {
-          const message = reason.error || 'Ошибка';
+          const message = typeof reason.error === 'string'? reason.error : 'Ошибка';
           this.messagesService.stopProgress(message);
         });
     }
