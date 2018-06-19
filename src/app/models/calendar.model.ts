@@ -78,8 +78,6 @@ export class CalendarModel {
 
     taskDay += _str;
     taskDay = taskDay.replace(' ', '_');
-    console.log(this.getActiveDate());
-    console.log(this);
     return taskDay;
   }
 

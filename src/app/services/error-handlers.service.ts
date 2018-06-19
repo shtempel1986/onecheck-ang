@@ -2,13 +2,16 @@ import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {MessagesService} from "./messages.service";
 import {AuthCheckService} from "../auth/auth-check.service";
+import {ErrorReport} from "../models/ErrorReport";
+import {RestDataSource} from "../models/rest.datasource";
 
 @Injectable()
 export class ErrorHandlersService {
 
   constructor(private router: Router,
               private messages: MessagesService,
-              private auth: AuthCheckService) {
+              private auth: AuthCheckService,
+              private restService: RestDataSource) {
   }
 
   httpErrorHandler(err) {
@@ -28,6 +31,10 @@ export class ErrorHandlersService {
       }
         break;
     }
+    const errorReport = new ErrorReport( err,this.auth.getCurrentUser().userId);
+
+    this.restService.sendPostRequest(`errors`,errorReport);
+
   }
 
 }

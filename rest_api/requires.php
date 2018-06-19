@@ -16,6 +16,7 @@ require_once 'classes/ErrorResponse.php';
 require_once 'classes/Auth.php';
 require_once 'classes/Task.php';
 require_once 'classes/WeeklyTask.php';
+require_once 'classes/ErrorReport.php';
 
 //ПРОВАЙДЕРЫ
 

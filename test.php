@@ -6,4 +6,4 @@
  * Time: 22:07
  */
 
-exit(strlen(hash('sha512','')).'');
+exit(json_encode($_SERVER,JSON_PRETTY_PRINT));
