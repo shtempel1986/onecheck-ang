@@ -88,10 +88,13 @@ export class TasksComponent implements OnInit, OnDestroy {
       let _wtl: WeeklyTask[] = this.weeklyTaskList
         .filter(value => value.weeklyTaskDay === currentWeekDay);
       //фильтрация по наличию в текущем списке
+
       for (let _t of this.tasks) {
         _wtl = _wtl
-          .filter(value => value.weeklyTaskDescription.toLowerCase() !== _t.taskDescription.toLowerCase());
+          .filter(value =>
+            _t.taskDescription.toLowerCase().indexOf(value.weeklyTaskDescription.toLowerCase()) > -1);
       }
+
       for (let _wt of _wtl) {
         let newTask = new TaskModel(taskDay);
         newTask.taskDescription = _wt.weeklyTaskDescription;
