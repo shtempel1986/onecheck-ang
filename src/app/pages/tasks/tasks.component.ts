@@ -92,9 +92,9 @@ export class TasksComponent implements OnInit, OnDestroy {
       for (let _t of this.tasks) {
         _wtl = _wtl
           .filter(value =>
-            _t.taskDescription.toLowerCase().indexOf(value.weeklyTaskDescription.toLowerCase()) > -1);
+            _t.taskDescription.toLowerCase().indexOf(value.weeklyTaskDescription.toLowerCase()) === -1);
       }
-
+      console.log(_wtl);
       for (let _wt of _wtl) {
         let newTask = new TaskModel(taskDay);
         newTask.taskDescription = _wt.weeklyTaskDescription;
