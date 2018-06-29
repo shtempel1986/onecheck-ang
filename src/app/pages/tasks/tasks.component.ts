@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core"
+import {Component, Injectable, OnDestroy, OnInit} from "@angular/core"
 import {CalendarModel} from "../../models/calendar.model";
 import {TaskModel} from "../../components/task/task.model";
 import {TasksService} from "./tasks.service";
@@ -7,13 +7,14 @@ import {Subscription} from "rxjs/Subscription";
 import {WeeklyTask} from "../../models/WeeklyTask";
 import {ErrorHandlersService} from "../../services/error-handlers.service";
 
+@Injectable()
 @Component({
   selector: 'tasks',
   templateUrl: 'tasks.component.html',
   styleUrls: ['tasks.component.sass']
 })
 export class TasksComponent implements OnInit, OnDestroy {
-  public tasks: TaskModel[] = [];
+  public tasks: TaskModel[];
   public unsubscribe: Array<Subscription> = [];
   private weeklyTaskList: Array<WeeklyTask>;
   private taskUpdated: boolean = false;
@@ -26,8 +27,6 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = true;
-
     this.getTasks();
     this.tasksService.updateTask(task => {
       this.tasks.push(task);
@@ -44,6 +43,11 @@ export class TasksComponent implements OnInit, OnDestroy {
 
     this.weeklyTaskList = this.weeklyTasksService.weeklyTaskListStorage;
     this.checkWeeklyTasks();
+
+    this.unsubscribe.push(this.calendar.dateUpdated.subscribe(()=>{
+      console.log(this);
+      this.getTasks()
+    },()=>{}));
 
   }
 
@@ -62,6 +66,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   getTasks() {
+  this.loading=true;
+    this.tasks = [];
     this.tasksService.getTasks<TaskModel>()
       .subscribe(tasks => {
           this.loading = false;
@@ -94,7 +100,7 @@ export class TasksComponent implements OnInit, OnDestroy {
           .filter(value =>
             _t.taskDescription.toLowerCase().indexOf(value.weeklyTaskDescription.toLowerCase()) === -1);
       }
-      console.log(_wtl);
+
       for (let _wt of _wtl) {
         let newTask = new TaskModel(taskDay);
         newTask.taskDescription = _wt.weeklyTaskDescription;

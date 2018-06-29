@@ -20,12 +20,20 @@ let calendarConsts = {
     }
     return Math.ceil((firstThursday - target.valueOf()) / this.week) + deltaWeek;
   },
-  getCurrentWeek: function () {
+  getCurrentWeek ():string {
     let currentWeek = this.getWeek(new Date());
     let currentYear = (new Date()).getFullYear();
 
     let currentWeekString = currentWeek + ' неделя ' + currentYear;
     return (currentWeekString);
+  },
+  getTomorrowWeek ():string {
+    let tomorrow = new Date(new Date().getTime() + this.day);
+    let tomorrowWeek = this.getWeek(tomorrow);
+    let tomorrowYear = (new Date()).getFullYear();
+
+    let tomorrowWeekString = tomorrowWeek + ' неделя ' + tomorrowYear;
+    return (tomorrowWeekString);
   },
   dayNames: [
     'воскресенье',
@@ -50,7 +58,7 @@ let calendarConsts = {
     'ноября',
     'декабря'
   ],
-  getTodaySeasonTitle: function () {
+  getTodaySeasonTitle ():string {
     let todaySeasonTitle: string;
     let now = new Date();
     let season: number;
@@ -67,6 +75,23 @@ let calendarConsts = {
     todaySeasonTitle += now.getFullYear();
     return todaySeasonTitle;
   },
+  getTomorrowSeasonTitle ():string {
+    let tomorrowSeasonTitle: string;
+    let tomorrow = new Date(new Date().getTime() + this.day);
+    let season: number;
+
+    season = tomorrow.getMonth() + 1;
+
+
+    if (season === 12) {
+      tomorrowSeasonTitle = this.seasonsNames[3] + ' ';
+    } else {
+      season = Math.floor(season / 3);
+      tomorrowSeasonTitle = this.seasonsNames[season] + ' ';
+    }
+    tomorrowSeasonTitle += tomorrow.getFullYear();
+    return tomorrowSeasonTitle;
+  },
   getTodayTitle():string {
     let todayTitle: string;
     let now = new Date();
@@ -78,7 +103,18 @@ let calendarConsts = {
 
     return todayTitle;
   },
-  rusMonthToNumber: function (str):string {
+  getTomorrowTitle():string {
+    let tomorrowTitle: string;
+    let tomorrow = new Date(new Date().getTime() + this.day);
+
+    tomorrowTitle = tomorrow.getDate()+ ' ';
+    tomorrowTitle += this.monthNames[tomorrow.getMonth()];
+    tomorrowTitle += ' ';
+    tomorrowTitle += this.dayNames[tomorrow.getDay()];
+
+    return tomorrowTitle;
+  },
+  rusMonthToNumber (str):string {
     let _str: string;
     _str = str;
 

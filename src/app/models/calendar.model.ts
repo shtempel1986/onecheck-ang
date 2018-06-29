@@ -2,6 +2,9 @@ import {Injectable} from "@angular/core"
 import calendarConsts from './calendarConsts';
 import Season from './Season';
 import Week from './Week';
+import {Router} from "@angular/router";
+import {TasksComponent} from "../pages/tasks/tasks.component";
+import {Observable} from "rxjs/Observable";
 
 
 /* =======================================================
@@ -22,10 +25,18 @@ export class CalendarModel {
   public todaySeasonTitle: string = calendarConsts.getTodaySeasonTitle();
   public todayWeekTitle: string = calendarConsts.getCurrentWeek();
   public todayTitle: string = calendarConsts.getTodayTitle();
+  public dateUpdated: Observable<null>;
+  private dateUpdateNext: Function;
 
   constructor() {
 
     this.today = new Date();
+
+    this.dateUpdated = new Observable<null>((observer) => {
+      this.dateUpdateNext = function () {
+        observer.next()
+      };
+    });
 
   }
 
@@ -61,6 +72,18 @@ export class CalendarModel {
     this.activeSeason = new Season(calendarConsts.getTodaySeasonTitle());
     this.activeWeek = new Week(calendarConsts.getCurrentWeek());
     this.activeDay = calendarConsts.getTodayTitle();
+    if (this.dateUpdateNext) {
+      this.dateUpdateNext();
+    }
+  }
+
+  setTomorrowActiveDay() {
+    this.activeSeason = new Season(calendarConsts.getTomorrowSeasonTitle());
+    this.activeWeek = new Week(calendarConsts.getTomorrowWeek());
+    this.activeDay = calendarConsts.getTomorrowTitle();
+    if (this.dateUpdateNext) {
+      this.dateUpdateNext();
+    }
   }
 
   getTaskDay(): string {
@@ -81,13 +104,13 @@ export class CalendarModel {
     return taskDay;
   }
 
-  getActiveDate(){
+  getActiveDate() {
     let activeDate = new Date(this.activeWeek.weekStart);
 
     let numberInWeek: number = 0;
 
-    this.activeWeek.daysList.map((el,idx)=>{
-      if(this.activeDay === el){
+    this.activeWeek.daysList.map((el, idx) => {
+      if (this.activeDay === el) {
         numberInWeek = idx;
       }
     });

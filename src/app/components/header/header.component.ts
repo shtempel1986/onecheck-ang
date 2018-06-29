@@ -9,11 +9,11 @@ import {CalendarModel} from "../../models/calendar.model";
   styleUrls:['header.component.sass']
 })
 export class HeaderComponent{
-
+  public router: Router;
   constructor(private authCheck: AuthCheckService,
-              public router: Router,
+              router: Router,
               public calendar: CalendarModel){
-
+      this.router = router;
   }
 
   logOut(){

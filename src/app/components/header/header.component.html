@@ -1,6 +1,6 @@
 <div class="container-fluid bg-dark p-2 header">
   <div class="navbar navbar-dark navbar-expand">
-    <a routerLink="" class="navbar-brand text-danger mb-0 header__logo">Onecheck</a>
+    <a routerLink="" class="navbar-brand text-danger mb-0 header__logo">OС</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a routerLink="seasons"
@@ -9,13 +9,18 @@
       </li>
       <li>
         <a routerLink="tasks" class="nav-link header__link"
-           (click)="calendar.setTodayActiveDay()"
-           [routerLinkActive]="'d-none'">Сегодня</a>
+           [routerLinkActive]="'d-ndone'"
+           (click)="calendar.setTodayActiveDay()">Сегодня</a>
+      </li>
+      <li>
+        <a routerLink="tasks" class="nav-link header__link"
+           [routerLinkActive]="'d-ndone'"
+           (click)="calendar.setTomorrowActiveDay()">Завтра</a>
       </li>
       <li class="pl-5">
         <a routerLink="weekly-tasks"
            class="nav-link header__link text-info"
-           [routerLinkActive]="'active'">Еженедельные дела</a>
+           [routerLinkActive]="'active'">Дни</a>
       </li>
     </ul>
     <button (click)="logOut()"
