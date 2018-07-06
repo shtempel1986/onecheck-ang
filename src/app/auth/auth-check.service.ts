@@ -35,6 +35,7 @@ export class AuthCheckService {
   }
 
   logOut() {
+
     this.email = null;
     this.sessionToken = null;
     this.userId = null;

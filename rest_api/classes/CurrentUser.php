@@ -66,7 +66,7 @@ class CurrentUser extends User
     }
 
     if (!isset($sessions[$sessionToken])) {
-      new ErrorResponse(json_encode($sessions) . ' ' . $sessionToken, 403);
+      new ErrorResponse( 'Не найденна сесия ' . $sessionToken, 403);
     }
 
   }

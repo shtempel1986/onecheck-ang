@@ -63,8 +63,8 @@ export class RestDataSource {
     return this.http.post<T>(`${this.url}/${url}`, data, this.paramsWithAuth);
   }
 
-  sendDeleteRequest<T>(url: string): Observable<any> {
+  sendDeleteRequest<T>(url: string, data = null): Observable<any> {
     this.updateSessionToken('DELETE');
-    return this.http.post<T>(`${this.url}/${url}`,null, this.paramsWithAuth);
+    return this.http.post<T>(`${this.url}/${url}`,data, this.paramsWithAuth);
   }
 }

@@ -11,24 +11,38 @@ function route($method, $urlData, $formData)
 {
 
 
-  if($method === 'POST'){
+  if ($method === 'POST') {
     $email = $formData->email;
     $password = $formData->password;
 
     $auth = new Auth($email, $password);
 
-    if($auth->checkEmail()){
-       new ErrorResponse('Пользователь не найден');
+    if ($auth->checkEmail()) {
+      new ErrorResponse('Пользователь не найден');
     }
 
     $currentUser = $auth->checkPassword();
 
-    if(!$currentUser){
-       new ErrorResponse('Пароль не верен');
+    if (!$currentUser) {
+      new ErrorResponse('Пароль не верен');
     }
 
     exit(json_encode($currentUser));
 
+  }
+
+  switch ($method) {
+    case 'DELETE':
+      {
+        $userId = $formData->userId;
+        CurrentUser::checkUserAuth($userId);
+        exit(json_encode(Auth::deleteToken($userId)));
+      }
+      break;
+
+    case 'OPTIONS':
+      exit;
+      break;
   }
 
 }

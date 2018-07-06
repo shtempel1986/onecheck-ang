@@ -10,7 +10,7 @@ function route($method, $urlData, $formData)
 {
   switch ($method) {
     case "POST":{
-//      $errorReport = new ErrorReport($formData);
+      $errorReport = new ErrorReport($formData);
       exit($formData);
     }
       break;
