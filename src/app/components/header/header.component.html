@@ -4,16 +4,18 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a routerLink="seasons"
-           class="nav-link header__link"
+           class="nav-link text-primary header__link"
            [routerLinkActive]="'active'">Времена года</a>
       </li>
       <li>
-        <a routerLink="tasks" class="nav-link header__link"
+        <a routerLink="tasks"
+           class="nav-link text-success header__link"
            [routerLinkActive]="'d-ndone'"
            (click)="calendar.setTodayActiveDay()">Сегодня</a>
       </li>
       <li>
-        <a routerLink="tasks" class="nav-link header__link"
+        <a routerLink="tasks"
+           class="nav-link text-success header__link"
            [routerLinkActive]="'d-ndone'"
            (click)="calendar.setTomorrowActiveDay()">Завтра</a>
       </li>
