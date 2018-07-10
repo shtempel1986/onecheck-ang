@@ -9,10 +9,13 @@
 define('SALT_MAX_LENGTH',8);
 define('JSON_OPTIONS', JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
-$dbpass = "8aa652zd689a";
-$dblogin = "gb_onecheck";
-$dbhost = "mysql94.1gb.ru";
-$dbname = "gb_onecheck";
+$dbData = file_get_contents(__DIR__.'/db_access');
+$dbData = json_decode($dbData);
+
+$dbpass = $dbData->dbpass;
+$dblogin = $dbData->dblogin;
+$dbhost = $dbData->dbhost;
+$dbname = $dbData->dbname;
 
 date_default_timezone_set('Europe/Moscow');
 
