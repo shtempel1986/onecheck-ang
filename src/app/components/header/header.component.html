@@ -2,24 +2,24 @@
   <div class="navbar navbar-dark navbar-expand">
     <a routerLink="" class="navbar-brand text-danger mb-0 header__logo">OС</a>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="router.url!=='/auth' && router.url!== '/registration'">
         <a routerLink="seasons"
            class="nav-link text-primary header__link"
            [routerLinkActive]="'active'">Времена года</a>
       </li>
-      <li>
+      <li *ngIf="router.url!=='/auth' && router.url!== '/registration'">
         <a routerLink="tasks"
            class="nav-link text-success header__link"
            [routerLinkActive]="'d-ndone'"
            (click)="calendar.setTodayActiveDay()">Сегодня</a>
       </li>
-      <li>
+      <li *ngIf="router.url!=='/auth' && router.url!== '/registration'">
         <a routerLink="tasks"
            class="nav-link text-success header__link"
            [routerLinkActive]="'d-ndone'"
            (click)="calendar.setTomorrowActiveDay()">Завтра</a>
       </li>
-      <li class="pl-5">
+      <li class="pl-5" *ngIf="router.url!=='/auth' && router.url!== '/registration'">
         <a routerLink="weekly-tasks"
            class="nav-link header__link text-info"
            [routerLinkActive]="'active'">Дни</a>
@@ -27,7 +27,8 @@
     </ul>
     <button (click)="logOut()"
             *ngIf="(router.url !== '/auth') && (router.url !== '/registration')"
-        class="btn btn-outline-danger header__button">Выход</button>
+            class="btn btn-outline-danger header__button">Выход
+    </button>
   </div>
 
 </div>

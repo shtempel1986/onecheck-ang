@@ -19,6 +19,7 @@ export class HeaderComponent {
               private rest: RestDataSource,
               private log: ErrorHandlersService) {
     this.router = router;
+    console.log(this.router);
   }
 
   logOut() {
